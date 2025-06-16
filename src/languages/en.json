@@ -86,6 +86,7 @@
     "channelNameCommands": "commands",
     "channelNameEvents": "events",
     "channelNameInformation": "information",
+    "channelNameOtherInformation": "other-informations",
     "channelNameServers": "servers",
     "channelNameSettings": "settings",
     "channelNameStorageMonitors": "storageMonitors",

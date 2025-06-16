@@ -20,9 +20,12 @@
 
 const DiscordTools = require('../discordTools/discordTools.js');
 const PermissionHandler = require('../handlers/permissionHandler.js');
+const DiscordEmbeds = require('./discordEmbeds.js');
+const Constants = require('../util/constants.js');
 
 module.exports = async (client, guild, category) => {
     await addTextChannel(client.intlGet(guild.id, 'channelNameInformation'), 'information', client, guild, category);
+    await addTextChannel(client.intlGet(guild.id, 'channelNameOtherInformation'), 'otherInformation', client, guild, category, false, true);
     await addTextChannel(client.intlGet(guild.id, 'channelNameServers'), 'servers', client, guild, category);
     await addTextChannel(client.intlGet(guild.id, 'channelNameSettings'), 'settings', client, guild, category);
     await addTextChannel(client.intlGet(guild.id, 'channelNameCommands'), 'commands', client, guild, category, true);
@@ -37,7 +40,7 @@ module.exports = async (client, guild, category) => {
     await addTextChannel(client.intlGet(guild.id, 'channelNameTrackers'), 'trackers', client, guild, category);
 };
 
-async function addTextChannel(name, idName, client, guild, parent, permissionWrite = false) {
+async function addTextChannel(name, idName, client, guild, parent, permissionWrite = false, sendIntroEmbed = false) {
     const instance = client.getInstance(guild.id);
 
     let channel = undefined;
@@ -82,4 +85,16 @@ async function addTextChannel(name, idName, client, guild, parent, permissionWri
     //channel.setName(name);
 
     channel.lockPermissions();
+
+    if (sendIntroEmbed) {
+        await client.messageSend(channel, {
+            embeds: [DiscordEmbeds.getEmbed({
+                color: Constants.COLOR_DEFAULT,
+                title: 'Other Information',
+                description: 'This is the other information channel.'
+            })]
+        });
+    }
+
+    return channel;
 }

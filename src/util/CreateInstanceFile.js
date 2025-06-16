@@ -34,6 +34,7 @@ module.exports = (client, guild) => {
             channelId: {
                 category: null,
                 information: null,
+                otherInformation: null,
                 servers: null,
                 settings: null,
                 commands: null,
@@ -134,6 +135,7 @@ module.exports = (client, guild) => {
         else {
             if (!instance.channelId.hasOwnProperty('category')) instance.channelId.category = null;
             if (!instance.channelId.hasOwnProperty('information')) instance.channelId.information = null;
+            if (!instance.channelId.hasOwnProperty('otherInformation')) instance.channelId.otherInformation = null;
             if (!instance.channelId.hasOwnProperty('servers')) instance.channelId.servers = null;
             if (!instance.channelId.hasOwnProperty('settings')) instance.channelId.settings = null;
             if (!instance.channelId.hasOwnProperty('commands')) instance.channelId.commands = null;
